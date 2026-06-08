@@ -31,10 +31,6 @@ def home():
 
 @app.route("/api", methods=["POST"])
 def results():
-    if request.method == 'OPTIONS':
-        return '', 204
-    # Verifique a chave de autorização
-    auth_key = request.headers.get("Authorization")
     data = request.get_json(force=True)
     consulta = data["consulta"]
     resultado = gerarBuscarConsulta(consulta, modeloEmbeddings)
