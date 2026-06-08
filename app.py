@@ -11,7 +11,7 @@ from geminiFunctions import gerarBuscarConsulta, melhorarResposta
 
 load_dotenv()
 app = Flask(__name__)
-CORS(app)  # Initialize CORS for the entire application
+ # Initialize CORS for the entire application
 modelo = 'gemini-3-flash-preview'
 modeloEmbeddings = pickle.load(open('datasetEmbeddings.pkl','rb'))
 chave_secreta = os.getenv('GEMINI_API_KEY')
