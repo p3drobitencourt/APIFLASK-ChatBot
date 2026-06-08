@@ -31,8 +31,6 @@ def home():
 def results():
     # Verifique a chave de autorização
     auth_key = request.headers.get("Authorization")
-    if auth_key != chave_secreta:
-        return jsonify({"error": "Unauthorized"}), 401
     data = request.get_json(force=True)
     consulta = data["consulta"]
     resultado = gerarBuscarConsulta(consulta, modeloEmbeddings)
