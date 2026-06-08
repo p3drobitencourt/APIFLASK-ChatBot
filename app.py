@@ -12,6 +12,8 @@ from geminiFunctions import gerarBuscarConsulta, melhorarResposta
 load_dotenv()
 app = Flask(__name__)
  # Initialize CORS for the entire application
+# Apply CORS specifically to the correct /api endpoint
+CORS(app, resources={r"/api": {"origins": "https://front-api-flask.vercel.app"}})
 modelo = 'gemini-3-flash-preview'
 modeloEmbeddings = pickle.load(open('datasetEmbeddings.pkl','rb'))
 chave_secreta = os.getenv('GEMINI_API_KEY')
@@ -29,6 +31,8 @@ def home():
 
 @app.route("/api", methods=["POST"])
 def results():
+    if request.method == 'OPTIONS':
+        return '', 204
     # Verifique a chave de autorização
     auth_key = request.headers.get("Authorization")
     data = request.get_json(force=True)
