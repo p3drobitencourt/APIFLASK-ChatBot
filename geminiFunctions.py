@@ -6,19 +6,6 @@ import numpy as np
 import os
 from dotenv import load_dotenv
 
-model = 'models/gemini-embedding-001'
-def gerarBuscarConsulta(consulta,dataset):
-    embedding_consulta = generativeai.embed_content(model=model,
-                                content=consulta,
-                                task_type="retrieval_query",
-                                )
-    produtos_escalares = np.dot(np.stack(dataset["Embeddings"]), embedding_consulta['embedding']) # Calculo de distancia entre consulta e a base
-    #print(embedding_consulta)
-    #print(produtos_escalares)
-    indice = np.argmax(produtos_escalares)
-    #print(produtos_escalares[indice])
-    return dataset.iloc[indice]['Conteúdo']
-
 
 modelo = 'gemini-3-flash-preview'
 
